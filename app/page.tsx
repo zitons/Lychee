@@ -1,3 +1,10 @@
+/*
+ * @Date: 2025-02-20
+ * @LastEditors: vhko
+ * @LastEditTime: 2025-02-20
+ * @FilePath: /AisCai-Lab/app/page.tsx
+ * Helllllloo
+ */
 interface BlogIndexPage {
   id: number;
   title: string;
@@ -13,7 +20,8 @@ interface BlogPage {
   date: string;
   intro: string;
 }
-
+import Head from "@/components/head";
+import Main from "@/components/main";
 export default async function BlogIndex() {
   // Fetch the BlogIndexPage's details
   const indexPages = await fetch(
@@ -48,15 +56,17 @@ export default async function BlogIndex() {
 
   // Use BlogPage instances as the posts
   const posts: BlogPage[] = data.items;
-
+  console.log(index);
   return (
     <main>
+      <Head abc={index} />
       <div className="mb-8">
-        <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div>
+        <Main />
+        {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
       </div>
       {/* The rest is the same as the previous example */}
-      <ul>
+      {/* <ul>
         {posts.map((child) => (
           <li key={child.id} className="mb-4">
             <a className="underline" href={`${child.meta.slug}`}>
@@ -68,7 +78,7 @@ export default async function BlogIndex() {
             <p>{child.intro}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </main>
   );
 }
