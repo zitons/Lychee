@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-20
+ * @LastEditTime: 2025-02-22
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
@@ -57,28 +57,11 @@ export default async function BlogIndex() {
   // Use BlogPage instances as the posts
   const posts: BlogPage[] = data.items;
   console.log(index);
+  console.log(posts);
   return (
     <main>
       <Head abc={index} />
-      <div className="mb-8">
-        <Main />
-        {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
-      </div>
-      {/* The rest is the same as the previous example */}
-      {/* <ul>
-        {posts.map((child) => (
-          <li key={child.id} className="mb-4">
-            <a className="underline" href={`${child.meta.slug}`}>
-              <h2>{child.title}</h2>
-            </a>
-            <time dateTime={child.date}>
-              {new Date(child.date).toDateString()}
-            </time>
-            <p>{child.intro}</p>
-          </li>
-        ))}
-      </ul> */}
+      <Main PostData={posts} />
     </main>
   );
 }

@@ -1,37 +1,56 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-20
+ * @LastEditTime: 2025-02-22
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
-export default function main() {
+import Image from "next/image";
+import Posts from "@/components/allpost";
+export default function maind({ PostData }) {
+  console.log(PostData);
   return (
-    <main className=" m-auto  max-2xl:max-w-[1280px] mt-[6rem] flex gap-6">
-      <div className="relative rounded-3xl overflow-hidden w-[500px] h-[320px] bg-gray-200">
-        <div className="absolute top-1/4 left-10 text-white">
-          <h1 className="text-4xl font-bold">让人人都享受到</h1>
-          <h1 className="text-4xl font-bold">时代的便捷</h1>
+    <section className="container layout">
+      <div className="carousel">
+        <div className="swiper">
+          <div className="absolute mt-12 left-10 text-white z-10">
+            <h1 className="text-4xl font-bold w-[59%]">
+              让人人都享受到时代的便捷
+            </h1>
+          </div>
+          <div>
+            <Image
+              className="rounded-[18px]"
+              src={
+                "http://137.184.36.245:8000/media/images/saradasish-pradhan-gEpncIlZq7c-unsplash.original.jpg"
+              }
+              alt="1"
+              // width={100}
+              // height={100}
+              fill={true}
+            />
+          </div>
+        </div>
+        <div className="top gap-[20px] flex flex-col">
+          <div className="notice">
+            <h1>收集了999+的模型{PostData[0].title}</h1>
+          </div>
+          <div className=" notice">
+            <h1>赞助我们</h1>
+          </div>
+        </div>
+        <div className="notice-right">
+          <h1 className="text-xl font-bold">热搜</h1>
+          <ul className="text-lg mt-4 ">
+            <li>hahaha</li>
+            <li>hahaha</li>
+            <li>hahaha</li>
+            <li>hahaha</li>
+            <li>hahaha</li>
+          </ul>
         </div>
       </div>
-      <div className="top gap-[20px] flex flex-col">
-        <div className=" rounded-xl bg-slate-300 h-[150px] w-[240px] p-4">
-          <h1>收集了999+的模型</h1>
-        </div>
-        <div className=" rounded-xl bg-slate-300 h-[150px] w-[240px] p-4">
-          <h1>收集了999+的模型</h1>
-        </div>
-      </div>
-      <div className="right w-[300px] h-[320px] bg-slate-400 rounded-2xl p-6 pt-4">
-        <h1 className="text-xl font-bold">热搜</h1>
-        <ul className="text-lg mt-4">
-          <li>hahaha</li>
-          <li>hahaha</li>
-          <li>hahaha</li>
-          <li>hahaha</li>
-          <li>hahaha</li>
-        </ul>
-      </div>
-    </main>
+      <Posts />
+    </section>
   );
 }

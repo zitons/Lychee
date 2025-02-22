@@ -1,3 +1,10 @@
+/*
+ * @Date: 2025-02-21
+ * @LastEditors: vhko
+ * @LastEditTime: 2025-02-21
+ * @FilePath: /AisCai-Lab/app/model/[id]/page.tsx
+ * Helllllloo
+ */
 import { notFound } from 'next/navigation';
 
 type Model = {
