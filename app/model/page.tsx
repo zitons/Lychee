@@ -20,7 +20,7 @@ type ModelListPageProps = {
 const PAGE_SIZE = 10;
 
 async function fetchModels(page: number) {
-    const res = await fetch(`http://137.184.36.245:8000/model/api/models/?format=json&page=${page}&page_size=${PAGE_SIZE}`, {
+    const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model&page=${page}&page_size=${PAGE_SIZE}`, {
         next: { revalidate: 10 }, // 支持页面缓存和数据重验证
     });
 
@@ -39,9 +39,6 @@ export default async function ModelListPage({
     const page = searchParams.page ? parseInt(searchParams.page, 10) : 1; // 默认第一页
     const data = await fetchModels(page);
 
-    if (!data.results) {
-        notFound(); // 如果没有数据则返回 404
-    }
 
     const totalPages = Math.ceil(data.count / PAGE_SIZE);
 
@@ -49,19 +46,19 @@ export default async function ModelListPage({
         <div>
             <h1>Model List</h1>
             <ul>
-                {data.results.map((model: Model) => (
+                {data.map((model: Model) => (
                     <li key={model.id}>
-                        <h2>{model.name}</h2>
-                        {model.icon ? (
-                            <img src={model.icon} alt={model.name} />
+                        <h2>{model.acf.name}</h2>
+                        {model.acf.icon ? (
+                            <img src={model.acf.icon} alt={model.acf.name} />
                         ) : (
                             <div>No icon available</div>
                         )}
-                        <p>{model.description}</p>
-                        <p>Release Date: {new Date(model.release_date).toLocaleDateString()}</p>
-                        <p>License: {model.license}</p>
-                        <p>Sizes: {model.sizes.join(', ')}</p>
-                        <a href={model.download_url}>Download</a>
+                        <p>{model.acf.words}</p>
+                        <p>Release Date: {model.acf.time}</p>
+                        <p>License: {model.acf.license}</p>
+                        <p>Sizes: {model.acf.size}</p>
+                        <a href={model.acf.download}>Download</a>
                     </li>
                 ))}
             </ul>

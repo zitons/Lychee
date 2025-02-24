@@ -1,10 +1,3 @@
-/*
- * @Date: 2025-02-21
- * @LastEditors: vhko
- * @LastEditTime: 2025-02-21
- * @FilePath: /AisCai-Lab/app/model/[id]/page.tsx
- * Helllllloo
- */
 import { notFound } from 'next/navigation';
 
 type Model = {
@@ -19,7 +12,7 @@ type Model = {
 };
 
 async function fetchModelDetails(id: string) {
-    const res = await fetch(`http://137.184.36.245:8000/model/api/models/${id}/`);
+    const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model/${id}/`);
     if (!res.ok) {
         throw new Error('Failed to fetch model details');
     }
@@ -46,17 +39,17 @@ export default async function ModelDetailPage({
 
     return (
         <div>
-            <h1>{model.name}</h1>
-            {model.icon ? (
-                <img src={model.icon} alt={model.name} style={{ maxWidth: '200px', marginBottom: '10px' }} />
+            <h1>{model.acf.name}</h1>
+            {model.acf.icon ? (
+                <img src={model.acf.icon} alt={model.acf.name} style={{ maxWidth: '200px', marginBottom: '10px' }} />
             ) : (
                 <div>No icon available</div>
             )}
             <p>{model.description}</p>
-            <p>Release Date: {new Date(model.release_date).toLocaleDateString()}</p>
-            <p>License: {model.license}</p>
-            <p>Sizes: {model.sizes.join(', ')}</p>
-            <a href={model.download_url}>Download</a>
+            <p>Release Date: {model.acf.time}</p>
+            <p>License: {model.acf.license}</p>
+            <p>Sizes: {model.acf.size}</p>
+            <a href={model.acf.download}>Download</a>
         </div>
     );
 }

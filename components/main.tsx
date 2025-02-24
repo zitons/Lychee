@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-23
+ * @LastEditTime: 2025-02-24
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
@@ -33,7 +33,7 @@ export default function maind({ PostData }) {
         </div>
         <div className="top gap-[20px] flex flex-col">
           <div className="notice">
-            <h1>收集了999+的模型{PostData[0].title}</h1>
+            <h1>收集了999+的模型{}</h1>
           </div>
           <div className=" notice">
             <h1>赞助我们</h1>

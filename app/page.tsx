@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-22
+ * @LastEditTime: 2025-02-24
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
@@ -22,46 +22,49 @@ interface BlogPage {
 }
 import Head from "@/components/head";
 import Main from "@/components/main";
-export default async function BlogIndex() {
-  // Fetch the BlogIndexPage's details
-  const indexPages = await fetch(
-    `http://137.184.36.245:8000/api/v2/pages/?${new URLSearchParams({
-      type: "blog.BlogIndexPage",
-      slug: "blog",
-      fields: "intro",
-    })}`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  ).then((response) => response.json());
 
-  // There's only one with the slug "blog"
-  const index: BlogIndexPage = indexPages.items[0];
 
-  // Fetch the BlogPages that are children of the BlogIndexPage instance
-  const data = await fetch(
-    `http://137.184.36.245:8000/api/v2/pages/?${new URLSearchParams({
-      type: "blog.BlogPage",
-      child_of: index.id.toString(),
-      fields: ["date", "intro","feed_image"].join(","),
-    })}`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  ).then((response) => response.json());
 
-  // Use BlogPage instances as the posts
-  const posts: BlogPage[] = data.items;
-  console.log(index);
-  console.log(posts);
+  export default async function BlogIndex() {
+    // Fetch the BlogIndexPage's details
+    const indexPages = await fetch(
+      `http://137.184.36.245:18281/index.php?rest_route=/wp/v2/posts&page=1`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    ).then((response) => response.json());
+  
+  
+  
+  
+    console.log(indexPages);
+   
   return (
     <main>
-      <Head abc={index} />
-      <Main PostData={posts} />
+      <Head abc={indexPages} />
+      <div className="mb-8">
+        <Main />
+        {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
+      </div>
+      {/* The rest is the same as the previous example */}
+      <ul>
+        {indexPages.map((child: any) => (
+          <li key={child.id} className="mb-4">
+            <a className="underline" href={``}>
+              <h2>{child.title.rendered}</h2>
+            </a>
+            <time dateTime={child.modified}>
+              {child.modified}
+            </time>
+            
+            <p>{child.featured_image_url}</p>
+          </li>
+        ))}
+      </ul>
     </main>
   );
+
 }
