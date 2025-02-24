@@ -42,6 +42,7 @@ export default function maind({ PostData }) {
         <div className="notice-right">
           <h1 className="text-xl font-bold">热搜</h1>
           <ul className="text-lg mt-4 ">
+            <li>测试</li>
             <li>hahaha</li>
             <li>hahaha</li>
             <li>hahaha</li>
