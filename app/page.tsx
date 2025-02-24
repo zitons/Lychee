@@ -23,29 +23,30 @@ interface BlogPage {
 import Head from "@/components/head";
 import Main from "@/components/main";
 
+export default async function BlogIndex() {
+  // Fetch the BlogIndexPage's details
+  const indexPages = await fetch(
+    `http://137.184.36.245:18281/index.php?rest_route=/wp/v2/posts&page=1`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+  const ress = indexPages.map((results) => {
+    return {
+      title: results.title.rendered,
+      id: results.id,
+    };
+  });
+  console.log(ress);
+  console.log(indexPages);
 
-
-  export default async function BlogIndex() {
-    // Fetch the BlogIndexPage's details
-    const indexPages = await fetch(
-      `http://137.184.36.245:18281/index.php?rest_route=/wp/v2/posts&page=1`,
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    ).then((response) => response.json());
-  
-  
-  
-  
-    console.log(indexPages);
-   
   return (
     <main>
       <Head abc={indexPages} />
       <div className="mb-8">
-        <Main />
+        <Main PostData={indexPages} />
         {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
       </div>
@@ -56,15 +57,12 @@ import Main from "@/components/main";
             <a className="underline" href={``}>
               <h2>{child.title.rendered}</h2>
             </a>
-            <time dateTime={child.modified}>
-              {child.modified}
-            </time>
-            
+            <time dateTime={child.modified}>{child.modified}</time>
+
             <p>{child.featured_image_url}</p>
           </li>
         ))}
       </ul>
     </main>
   );
-
 }
