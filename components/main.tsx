@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-22
+ * @LastEditTime: 2025-02-23
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
@@ -10,7 +10,7 @@ import Posts from "@/components/allpost";
 export default function maind({ PostData }) {
   console.log(PostData);
   return (
-    <section className="container layout">
+    <section className="container layout flex-col">
       <div className="carousel">
         <div className="swiper">
           <div className="absolute mt-12 left-10 text-white z-10">

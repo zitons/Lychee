@@ -1,3 +1,10 @@
+/*
+ * @Date: 2025-02-20
+ * @LastEditors: vhko
+ * @LastEditTime: 2025-02-22
+ * @FilePath: /AisCai-Lab/app/[slug]/page.tsx
+ * Helllllloo
+ */
 interface BlogPage {
     id: number;
     meta: {
@@ -19,7 +26,7 @@ export default async function Blog({
         `http://137.184.36.245:8000/api/v2/pages/?${new URLSearchParams({
             slug,
             type: "blog.BlogPage",
-            fields: ["date", "intro", "body"].join(","),
+            fields: ["date", "intro", "body","feed_image"].join(","),
         })}`,
         {
             headers: {

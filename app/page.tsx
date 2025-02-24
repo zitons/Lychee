@@ -45,7 +45,7 @@ export default async function BlogIndex() {
     `http://137.184.36.245:8000/api/v2/pages/?${new URLSearchParams({
       type: "blog.BlogPage",
       child_of: index.id.toString(),
-      fields: ["date", "intro"].join(","),
+      fields: ["date", "intro","feed_image"].join(","),
     })}`,
     {
       headers: {
