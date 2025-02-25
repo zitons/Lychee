@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-24
+ * @LastEditTime: 2025-02-25
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
@@ -51,7 +51,7 @@ export default function maind({ PostData }) {
           </ul>
         </div>
       </div>
-      <Posts />
+      <Posts PostItem={PostData} />
     </section>
   );
 }

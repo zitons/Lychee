@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-24
+ * @LastEditTime: 2025-02-25
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
@@ -33,20 +33,23 @@ export default async function BlogIndex() {
       },
     }
   ).then((response) => response.json());
-  const ress = indexPages.map((results) => {
+  const results = indexPages.map((data) => {
     return {
-      title: results.title.rendered,
-      id: results.id,
+      title: data.title.rendered,
+      title_slug: data.slug,
+      date: data.date,
+      img: data.featured_image_url,
+      id: data.id,
     };
   });
-  console.log(ress);
+  console.log(results);
   console.log(indexPages);
 
   return (
     <main>
       <Head abc={indexPages} />
       <div className="mb-8">
-        <Main PostData={indexPages} />
+        <Main PostData={results} />
         {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
       </div>

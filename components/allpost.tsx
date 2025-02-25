@@ -1,13 +1,14 @@
 /*
  * @Date: 2025-02-21
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-23
+ * @LastEditTime: 2025-02-25
  * @FilePath: /AisCai-Lab/components/allpost.tsx
  * Helllllloo
  */
 import Image from "next/image";
 
-export default function posts() {
+export default function posts({ PostItem }) {
+  console.log(PostItem);
   const list = [1, 2, 3, 4, 5, 6, 7, 8];
   const keys = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8"];
   const listitem = list.map(() => {
@@ -62,5 +63,21 @@ export default function posts() {
       </div>
     );
   });
-  return <div className="help-post">{listitem}</div>;
+  return (
+    <div className="help-post">
+      {listitem}
+
+      {PostItem.map((post: any) => (
+        <div key={post.id} className="mb-4">
+          <a className="underline" href={``}>
+            <h2>{post.title}</h2>
+            <p>{post.date}</p>
+          </a>
+          {/* <time dateTime={child.modified}>{child.modified}</time> */}
+
+          {/* <p>{child.featured_image_url}</p> */}
+        </div>
+      ))}
+    </div>
+  );
 }
