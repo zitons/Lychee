@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-25
+ * @LastEditTime: 2025-02-27
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
@@ -35,11 +35,13 @@ export default async function BlogIndex() {
   ).then((response) => response.json());
   const results = indexPages.map((data) => {
     return {
+      id: data.id,
       title: data.title.rendered,
       title_slug: data.slug,
       date: data.date,
-      img: data.featured_image_url,
-      id: data.id,
+      cover: data.featured_image_url,
+      tag: data.tags,
+      sort: data.categories,
     };
   });
   console.log(results);
@@ -54,7 +56,7 @@ export default async function BlogIndex() {
         <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
       </div>
       {/* The rest is the same as the previous example */}
-      <ul>
+      {/* <ul>
         {indexPages.map((child: any) => (
           <li key={child.id} className="mb-4">
             <a className="underline" href={``}>
@@ -65,7 +67,7 @@ export default async function BlogIndex() {
             <p>{child.featured_image_url}</p>
           </li>
         ))}
-      </ul>
+      </ul> */}
     </main>
   );
 }
