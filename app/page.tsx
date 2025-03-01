@@ -1,27 +1,50 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-27
+ * @LastEditTime: 2025-03-01
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
-interface BlogIndexPage {
-  id: number;
-  title: string;
-  intro: string;
-}
+// interface indexPages {
+//   id: number;
+//   title: string;
+//   intro: string;
+// }
 
-interface BlogPage {
-  id: number;
-  meta: {
-    slug: string;
-  };
-  title: string;
-  date: string;
-  intro: string;
-}
+// interface results {
+//   id: number;
+//   meta: {
+//     slug: string;
+//   };
+//   title: string;
+//   date: string;
+//   intro: string;
+// }
 import Head from "@/components/head";
 import Main from "@/components/main";
+interface PostData {
+  id: number;
+  title: { rendered: string };
+  slug: string;
+  date: string;
+  featured_image_url?: string;
+  cover?: string;
+  tags: number[];
+  tag: number[];
+  sort: string;
+  categories: string;
+  // cat_name:unknown;
+}
+
+interface PostResult {
+  id: number;
+  title: { rendered: string };
+  slug: string;
+  date: string;
+  cover?: string;
+  tag: number[];
+  sort: string;
+}
 
 export default async function BlogIndex() {
   // Fetch the BlogIndexPage's details
@@ -33,15 +56,29 @@ export default async function BlogIndex() {
       },
     }
   ).then((response) => response.json());
-  const results = indexPages.map((data) => {
+  //上面是获取文章标题等信息，下面是获取tag列表
+  const tags = await fetch(
+    "http://137.184.36.245:18281/index.php?rest_route=/wp/v2/tags",
+    {
+      headers: {
+        Accept: "application/json",
+      },
+    }
+  ).then((response) => response.json());
+  console.log(tags);
+  console.log(indexPages);
+  const results: PostResult[] = indexPages.map((data: PostData) => {
     return {
       id: data.id,
       title: data.title.rendered,
-      title_slug: data.slug,
-      date: data.date,
+      slug: data.slug,
+      date: new Date(data.date).toLocaleDateString("en-US", {
+        month: "2-digit",
+        day: "2-digit",
+      }),
       cover: data.featured_image_url,
       tag: data.tags,
-      sort: data.categories,
+      sort: data.categories[0],
     };
   });
   console.log(results);
@@ -51,23 +88,9 @@ export default async function BlogIndex() {
     <main>
       <Head abc={indexPages} />
       <div className="mb-8">
-        <Main PostData={results} />
-        {/* <h1 className="text-4xl font-bold mb-2">{index.title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: index.intro }}></div> */}
+        <Main PostData={results} TagItem={tags} />
       </div>
-      {/* The rest is the same as the previous example */}
-      {/* <ul>
-        {indexPages.map((child: any) => (
-          <li key={child.id} className="mb-4">
-            <a className="underline" href={``}>
-              <h2>{child.title.rendered}</h2>
-            </a>
-            <time dateTime={child.modified}>{child.modified}</time>
-
-            <p>{child.featured_image_url}</p>
-          </li>
-        ))}
-      </ul> */}
     </main>
   );
 }
+

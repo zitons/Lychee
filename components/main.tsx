@@ -1,13 +1,38 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-02-27
+ * @LastEditTime: 2025-03-01
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
+type Post = {
+  id: number;
+  title: {
+    rendered: string;
+  };
+  slug: string;
+  date: string;
+  featured_image_url?: string;
+  content?: {
+    rendered: string;
+  };
+  categories?: number[];
+  tags?: number[];
+};
+type Tag = {
+  slug: string;
+  name: string;
+};
+
+// 定义 props 类型
+type Props = {
+  PostData: Post[];
+  TagItem: Tag[];
+};
 import Image from "next/image";
 import Posts from "@/components/allpost";
-export default function maind({ PostData }) {
+import HomeBar from "./homebar";
+export default function maind({ PostData, TagItem }: Props) {
   console.log(PostData);
   return (
     <section className="container layout flex-col">
@@ -51,6 +76,7 @@ export default function maind({ PostData }) {
           </ul>
         </div>
       </div>
+      <HomeBar TagItem={TagItem} />
       <Posts PostItem={PostData} />
     </section>
   );

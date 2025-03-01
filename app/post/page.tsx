@@ -6,6 +6,8 @@
  * Helllllloo
  */
 
+import React from "react";
+
 export default async function Blog({
     params: { slug },
 }: {
