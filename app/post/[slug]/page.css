@@ -1,0 +1,45 @@
+.playout {
+  margin: auto;
+  padding-top: 150px;
+  width: 666px;
+}
+.playout img {
+  background-color: aliceblue;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+.playout p,
+ol {
+  font-size: 18px;
+}
+.ptitle {
+  --size: 18px;
+  font-size: calc(var(--size) * 1.6);
+  font-weight: 700;
+  margin-bottom: 1vw;
+}
+.ptitle span {
+  font-size: calc(var(--size));
+  color: #a8a8a8c7;
+}
+.wp-block-heading {
+  font-size: 22px;
+  font-weight: 600;
+}
+.wp-block-code {
+  background-color: #1e1e1e; /* 深色背景 */
+  color: #dcdcdc; /* 文字颜色 */
+  padding: 16px;
+  border-radius: 8px;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  overflow-x: auto; /* 允许横向滚动 */
+  line-height: 1.5;
+  white-space: pre-wrap; /* 保持换行 */
+  border: 1px solid #555;
+  margin: 10px;
+}
+.wp-block-code code {
+  display: block;
+  color: #dcdcdc;
+}

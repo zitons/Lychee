@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-01
+ * @LastEditTime: 2025-03-02
  * @FilePath: /AisCai-Lab/app/page.tsx
  * Helllllloo
  */
@@ -65,6 +65,9 @@ export default async function BlogIndex() {
       },
     }
   ).then((response) => response.json());
+  const hello = await fetch("http://v1.hitokoto.cn/?c=i");
+  const hitokoto = await hello.text;
+  console.log(hitokoto);
   console.log(tags);
   console.log(indexPages);
   const results: PostResult[] = indexPages.map((data: PostData) => {
@@ -93,4 +96,3 @@ export default async function BlogIndex() {
     </main>
   );
 }
-

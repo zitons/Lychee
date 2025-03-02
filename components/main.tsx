@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-01
+ * @LastEditTime: 2025-03-02
  * @FilePath: /AisCai-Lab/components/main.tsx
  * Helllllloo
  */
@@ -58,7 +58,7 @@ export default function maind({ PostData, TagItem }: Props) {
         </div>
         <div className="top gap-[20px] flex flex-col">
           <div className="notice">
-            <h1>收集了999+的模型{}</h1>
+            <h1>截止目前已收集了999+的模型</h1>
           </div>
           <div className=" notice">
             <h1>赞助我们</h1>
@@ -66,14 +66,14 @@ export default function maind({ PostData, TagItem }: Props) {
         </div>
         <div className="notice-right">
           <h1 className="text-xl font-bold">热搜</h1>
-          <ul className="text-lg mt-4 ">
-            <li>测试</li>
-            <li>hahaha</li>
-            <li>hahaha</li>
-            <li>hahaha</li>
-            <li>hahaha</li>
-            <li>hahaha</li>
-          </ul>
+          <div className="hot-title text-lg mt-4 ">
+            {PostData.map((Title, index) => (
+              <div key={Title.id} className="flex ">
+                <span>{index + 1}</span>
+                <p className="overflow-hidden text-clip">{Title.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <HomeBar TagItem={TagItem} />

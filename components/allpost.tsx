@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-21
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-01
+ * @LastEditTime: 2025-03-02
  * @FilePath: /AisCai-Lab/components/allpost.tsx
  * Helllllloo
  */
@@ -50,8 +50,8 @@ export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
             </div>
             <div className="bottom-tips flex">
               {post.tag.map((item) => (
-                <div key={item.slug} className={`tags ${item.slug}`}>
-                  <div className="w-4 h-4 relative">
+                <div key={item.slug} className={`tags`}>
+                  <div className={`${item.slug}`}>
                     <Image src={item.description} alt={item.name} fill={true} />
                   </div>
                   <p>{item.name}</p>

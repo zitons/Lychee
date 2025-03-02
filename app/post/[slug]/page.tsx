@@ -1,11 +1,12 @@
 /*
  * @Date: 2025-02-20
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-01
+ * @LastEditTime: 2025-03-02
  * @FilePath: /AisCai-Lab/app/post/[slug]/page.tsx
  * Helllllloo
  */
-
+import "../[slug]/page.css";
+import Head from "@/components/head";
 export default async function Blog({
   params: { slug },
 }: {
@@ -29,11 +30,16 @@ export default async function Blog({
 
   return (
     <main>
-      <div>
-        <h1 className="text-4xl font-bold mb-2">{post.title.rendered}</h1>
-        <time dateTime={post.modified}>{post.modified}</time>
-      </div>
-      <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
+      <Head />
+      <section className="playout">
+        <div>
+          <h1 className="ptitle">
+            {post.title.rendered}
+            <span>{new Date(post.modified).toISOString().split("T")[0]}</span>
+          </h1>
+        </div>
+        <div dangerouslySetInnerHTML={{ __html: post.content.rendered }}></div>
+      </section>
     </main>
   );
-}   
+}
