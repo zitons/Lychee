@@ -254,29 +254,32 @@ body {
   color: #8e8e8e;
   font-size: 16px;
 }
+
 .tags {
-  width: 80px;
+  --mar-left: 8px;
   height: 28px;
-  /* height: 10px; */
-  /* box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2); */
-  border: 1px solid rgba(187, 187, 187, 0.871);
-  /* background-color: #e2e2e2d3; */
   display: flex;
   align-items: center;
   gap: 2px;
   border-radius: 8px;
-  /* padding: 3px 8px; */
-
+  padding: 4px var(--mar-left);
 }
-.tags div{
-  position: relative;
+.tags:hover {
+  cursor: pointer;
+  background-color: rgba(103, 103, 103, 0.08);
+  /* border: 2px solid rgba(187, 187, 187, 0.871); */
+  transition: all 0.3s ease-out 0s;
+}
+.tags-svg {
+  display: flex;
+  margin-left: calc(-1 * var(--mar-left));
   width: 20px;
-  height: 100%;
-
+  align-self: stretch;
 }
+
 .tags p {
   line-height: 0.8;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 .top-tips {
   font-size: 12px;

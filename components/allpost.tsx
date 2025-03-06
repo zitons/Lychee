@@ -1,13 +1,13 @@
 /*
  * @Date: 2025-02-21
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-02
+ * @LastEditTime: 2025-03-06
  * @FilePath: /AisCai-Lab/components/allpost.tsx
  * Helllllloo
  */
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 type PostResult = {
   id: number;
@@ -25,41 +25,42 @@ type tagItem = {
 };
 
 export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
-  const router = useRouter();
   console.log(PostItem);
 
   return (
     <div className="help-post">
       {PostItem.map((post) => (
-        <div
-          className="post-item flex-col"
-          key={post.id}
-          onClick={() => router.push(`/post/${post.slug}`)}
-        >
-          <div className="post-cover">
-            <Image src={post.cover} alt="alt" fill={true} />
-          </div>
-          <div className="post-info flex-col">
-            <div className="post-title">
-              <div className="top-tips">
-                <p>{post.sort.cat_name}</p>
-              </div>
-              <p>
-                {post.title}&nbsp;<span>{post.date}</span>
-              </p>
+        <Link key={post.id} href={`/post/${post.slug}`}>
+          <div className="post-item flex-col">
+            <div className="post-cover">
+              <Image src={post.cover} alt="alt" fill={true} />
             </div>
-            <div className="bottom-tips flex">
-              {post.tag.map((item) => (
-                <div key={item.slug} className={`tags`}>
-                  <div className={`${item.slug}`}>
-                    <Image src={item.description} alt={item.name} fill={true} />
-                  </div>
-                  <p>{item.name}</p>
+            <div className="post-info flex-col">
+              <div className="post-title">
+                <div className="top-tips">
+                  <p>{post.sort.cat_name}</p>
                 </div>
-              ))}
+                <p>
+                  {post.title}&nbsp;<span>{post.date}</span>
+                </p>
+              </div>
+              <div className="bottom-tips flex">
+                {post.tag.map((item) => (
+                  <Link key={item.slug} href={`/post/demo1`}>
+                    <div className={`tags`}>
+                      {/* 下面是svg，暂时关闭 */}
+                      {/* <div
+                    className={`${item.slug} tags-svg`}
+                    dangerouslySetInnerHTML={{ __html: item.description }}
+                  ></div> */}
+                      <p>&#35;{item.name}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

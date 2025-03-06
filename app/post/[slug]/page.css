@@ -1,4 +1,5 @@
 .playout {
+  display: flex;
   margin: auto;
   padding-top: 150px;
   width: 666px;
@@ -11,6 +12,17 @@
 .playout p,
 ol {
   font-size: 18px;
+}
+.close {
+  position: absolute;
+  display: inline-flex;
+  left: 28%;
+  padding: 5px 10px;
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
 }
 .ptitle {
   --size: 18px;
