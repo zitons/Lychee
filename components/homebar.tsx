@@ -6,19 +6,23 @@
  * Helllllloo
  */
 type Tag = {
-    slug: string;
-    name: string;
-  };
-export default function HomeBar({ TagItem }:{TagItem:Tag[]}) {
+  slug: string;
+  name: string;
+  id: string
+};
+export default function HomeBar({ TagItem }: { TagItem: Tag[] }) {
   console.log(TagItem);
   return (
     <div className="homebar">
       <div className="block">
         <div className="flex text-[16px] gap-2">
           {TagItem.map((tag) => (
-            <p key={tag.slug} className="tagbar">
-              {tag.name}
-            </p>
+            <a href={"tags/" + tag.id}>
+
+              <p key={tag.slug} className="tagbar">
+                {tag.name}
+              </p>
+            </a>
           ))}
         </div>
       </div>
