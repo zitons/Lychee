@@ -1,98 +1,72 @@
-/*
- * @Date: 2025-02-20
- * @LastEditors: vhko
- * @LastEditTime: 2025-03-02
- * @FilePath: /AisCai-Lab/app/page.tsx
- * Helllllloo
- */
-// interface indexPages {
-//   id: number;
-//   title: string;
-//   intro: string;
-// }
+'use client';
+import { Suspense, useEffect, useState } from 'react';
+// import Sidebar from '@/components/Sidebar';
+import Dashboard from '@/components/Dashboard';
+import T from '@/components/home';
 
-// interface results {
-//   id: number;
-//   meta: {
-//     slug: string;
-//   };
-//   title: string;
-//   date: string;
-//   intro: string;
-// }
-import Head from "@/components/head";
-import Main from "@/components/main";
-interface PostData {
-  id: number;
-  title: { rendered: string };
-  slug: string;
-  date: string;
-  featured_image_url?: string;
-  cover?: string;
-  tags: number[];
-  tag: number[];
-  sort: string;
-  categories: string;
-  // cat_name:unknown;
-}
+export default function Home() {
+  const [activeSection, setActiveSection] = useState('dashboard');
 
-interface PostResult {
-  id: number;
-  title: { rendered: string };
-  slug: string;
-  date: string;
-  cover?: string;
-  tag: number[];
-  sort: string;
-}
+  const menuItems = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'profile', label: 'Profile' },
+    { id: 'settings', label: 'Settings' },
+  ];
 
-export default async function BlogIndex() {
-  // Fetch the BlogIndexPage's details
-  const indexPages = await fetch(
-    `http://137.184.36.245:18281/index.php?rest_route=/wp/v2/posts&page=1`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
+  // 调试状态变化
+  useEffect(() => {
+    console.log(`Active section changed to: ${activeSection}`);
+  }, [activeSection]);
+
+  // 处理菜单点击
+  const handleMenuClick = (id: string) => {
+    console.log(`Clicked menu item: ${id}`);
+    setActiveSection(id);
+  };
+
+  // 根据状态渲染对应组件
+  const renderContent = () => {
+    console.log(`Rendering content for: ${activeSection} at ${new Date().toISOString()}`);
+    switch (activeSection) {
+      case 'dashboard':
+        return <Dashboard key="dashboard" />;
+      case 'profile':
+        return <T key="profile" />;
+      case 'settings':
+        return <T key="settings" />;
+      default:
+        return <Dashboard key="dashboard" />;
     }
-  ).then((response) => response.json());
-  //上面是获取文章标题等信息，下面是获取tag列表
-  const tags = await fetch(
-    "http://137.184.36.245:18281/index.php?rest_route=/wp/v2/tags",
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  ).then((response) => response.json());
-  const hello = await fetch("http://v1.hitokoto.cn/?c=i");
-  const hitokoto = await hello.text;
-  console.log(hitokoto);
-  console.log(tags);
-  console.log(indexPages);
-  const results: PostResult[] = indexPages.map((data: PostData) => {
-    return {
-      id: data.id,
-      title: data.title.rendered,
-      slug: data.slug,
-      date: new Date(data.date).toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-      }),
-      cover: data.featured_image_url,
-      tag: data.tags,
-      sort: data.categories[0],
-    };
-  });
-  console.log(results);
-  console.log(indexPages);
+  };
 
   return (
-    <main>
-      <Head abc={indexPages} />
-      <div className="mb-8">
-        <Main PostData={results} TagItem={tags} />
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-800 text-white flex flex-col">
+        <div className="p-4 text-2xl font-bold">Menu</div>
+        <nav className="flex-1">
+          <ul>
+            {menuItems.map((item) => (
+              <li key={item.id}>
+                <button
+                  type="button"
+                  onClick={() => handleMenuClick(item.id)}
+                  className={`block w-full text-left p-4 hover:bg-gray-700 ${activeSection === item.id ? 'bg-gray-700' : ''
+                    }`}
+                >
+                  {item.label}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </div>
-    </main>
+      {/* Main Content */}
+      <div className="flex-1 p-8 bg-gray-100 overflow-auto">
+        <Suspense fallback={<div className="text-gray-500">Loading content...</div>}>
+          {renderContent()}
+        </Suspense>
+      </div>
+    </div>
   );
 }
