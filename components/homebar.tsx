@@ -17,9 +17,9 @@ export default function HomeBar({ TagItem }: { TagItem: Tag[] }) {
       <div className="block">
         <div className="flex text-[16px] gap-2">
           {TagItem.map((tag) => (
-            <a href={"tags/" + tag.id}>
+            <a href={"tags/" + tag.id} key={tag.id}>
 
-              <p key={tag.slug} className="tagbar">
+              <p className="tagbar">
                 {tag.name}
               </p>
             </a>

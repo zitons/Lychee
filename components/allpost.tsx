@@ -22,6 +22,7 @@ type tagItem = {
   slug: string;
   description: string;
   name: string;
+  term_id: string; // Added term_id property
 };
 
 export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
@@ -46,7 +47,7 @@ export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
               </div>
               <div className="bottom-tips flex">
                 {post.tag.map((item) => (
-                  <Link key={item.slug} href={`/post/demo1`}>
+                  <Link key={item.term_id} href={`/post/demo1`}>
                     <div className={`tags`}>
                       {/* 下面是svg，暂时关闭 */}
                       {/* <div
