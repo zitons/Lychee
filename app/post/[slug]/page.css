@@ -1,10 +1,11 @@
 .playout {
   display: flex;
+  flex-direction:column;
   margin: auto;
   padding-top: 150px;
   width: 666px;
 }
-.playout img {
+.playout .wp-block-image img{
   background-color: aliceblue;
   margin: 10px 0;
   border-radius: 10px;
@@ -13,11 +14,40 @@
 ol {
   font-size: 18px;
 }
+.post-top{
+  display: flex;
+  align-items: flex-end;
+}
+.top-slug{
+  margin-bottom: 5px;
+  display: inline-flex;
+  margin-right: 8px;
+  background-color: pink;
+  height: 10px;
+  line-height: 0;
+  padding: 2px;
+  transition: all .4s;
+}
+.top-slug:hover{
+  height: 18px;
+  line-height: 0.8;
+}
+.top-tags{
+  display: flex;
+  /* gap: 10px; */
+}
+.top-tags p{
+  font-size: 18px;
+  padding-bottom: 0px;
+}
+
 .close {
   position: absolute;
   display: inline-flex;
-  left: 28%;
-  padding: 5px 10px;
+  top: 0;
+  right: 0;
+  margin-top: 20px;
+  padding: 0px 10px;
   color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
@@ -55,3 +85,6 @@ ol {
   display: block;
   color: #dcdcdc;
 }
+/* .wp-block-post-featured-image{
+  display: none;
+} */
