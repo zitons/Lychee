@@ -1,7 +1,7 @@
 /*
  * @Date: 2025-02-21
  * @LastEditors: vhko
- * @LastEditTime: 2025-03-06
+ * @LastEditTime: 2025-03-22
  * @FilePath: /AisCai-Lab/components/allpost.tsx
  * Helllllloo
  */
@@ -31,7 +31,7 @@ export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
   return (
     <div className="help-post">
       {PostItem.map((post) => (
-        <Link key={post.id} href={`/post/${post.slug}`}>
+        <Link key={post.id} href={`/post/${post.slug}`} id="post-hover">
           <div className="post-item flex-col">
             <div className="post-cover">
               <Image src={post.cover} alt="alt" fill={true} />
@@ -41,7 +41,7 @@ export default function Posts({ PostItem }: { PostItem: PostResult[] }) {
                 <div className="top-tips">
                   <p>{post.sort.cat_name}</p>
                 </div>
-                <p>
+                <p id="post-title">
                   {post.title}&nbsp;<span>{post.date}</span>
                 </p>
               </div>
