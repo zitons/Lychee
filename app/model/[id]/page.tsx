@@ -22,7 +22,8 @@ async function fetchModelDetails(id: string) {
 }
 
 export default async function ModelDetailPage(params: {
-    params: Promise<{ slug: string }>;) {
+    params: Promise<{ slug: string }>
+}) {
     let model: Model | null = null;
     const id = await (params).id;
 
