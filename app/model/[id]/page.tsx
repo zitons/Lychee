@@ -20,8 +20,8 @@ async function fetchModelDetails(id: string) {
     return res.json();
 }
 
-export default async function Layout(props: { children: ReactNode; params: Promise<{ id: string }> }) {
-    const { children, params } = props;
+export default async function Layout(props: { params: Promise<{ id: string }> }) {
+    const { params } = props;
 
     const { id } = await params;
     let model: Model | null = null;
