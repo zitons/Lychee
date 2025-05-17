@@ -12,13 +12,7 @@ type Model = {
     download_url: string;
 };
 
-async function fetchModelDetails(id: string) {
-    const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model/${id}/`);
-    if (!res.ok) {
-        throw new Error('Failed to fetch model details');
-    }
-    return res.json();
-}
+
 type Params = { id: string };
 
 export default async function Page({ params }: { params: Params }) {
@@ -26,7 +20,11 @@ export default async function Page({ params }: { params: Params }) {
     let model: Model | null = null;
 
     try {
-        model = await fetchModelDetails(id);
+           const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model/${id}/`);
+            if (!res.ok) {
+                throw new Error('Failed to fetch model details');
+            }
+            model=await res.json();
     } catch (error) {
         notFound(); // 如果没有找到模型，显示 404 页面
     }
