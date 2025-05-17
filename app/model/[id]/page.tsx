@@ -20,9 +20,10 @@ async function fetchModelDetails(id: string) {
 }
 
 export default async function ModelDetailPage({
-    params, // 动态路由参数
-}: { params: Promise<{ id: string }> }) {
-    const { id } = await params;
+    params: { id },
+}: {
+    params: { id: string };
+}) {
     let model: Model | null = null;
 
     try {
