@@ -2,7 +2,6 @@
 import { useState, useEffect, Suspense } from 'react';
 import Head from '@/components/head';
 import Main from '@/components/main';
-import { Wordpress } from '@/lib/wordpress';
 
 interface PostResult {
     id: number;
@@ -14,33 +13,20 @@ interface PostResult {
     sort: string;
 }
 
-export default function Profile() {
-    const [data, setData] = useState<{
-        indexPages: any[];
-        tags: any[];
-        hitokoto: string;
-        results: PostResult[];
-    } | null>(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+export default function Profile(props: any) {
+    // type data = {
+    //     indexPages: any[];
+    //     tags: any[];
+    //     hitokoto: string;
+    //     results: PostResult[];
+    // }
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState<string | null>(null);
 
-    useEffect(() => {
-        setLoading(true);
-        Wordpress()
-            .then((blogData) => {
-                console.log('获取博客数据成功:', blogData);
-                setData(blogData);
-                setLoading(false);
-            })
-            .catch((err) => {
-                console.error('获取博客数据失败:', err);
-                setError('加载个人主页数据失败');
-                setLoading(false);
-            });
-    }, []);
-
-    if (loading) return <div className="text-green-500">加载主页...</div>;
-    if (error) return <div className="text-red-500">{error}</div>;
+    let data = props.data;
+    // console.log(data.indexPages[0]);
+    // if (loading) return <div className="text-green-500">加载主页...</div>;
+    // if (error) return <div className="text-red-500">{error}</div>;
 
     return (
         <div className="border-2 border-green-500 p-4">
