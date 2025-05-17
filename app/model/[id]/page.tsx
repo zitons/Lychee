@@ -19,10 +19,10 @@ async function fetchModelDetails(id: string) {
     }
     return res.json();
 }
-type Params = Promise<{ slug: string[] }>;
-export default async function Page({ params }: { params: Params }) {
+type Params = { id: string };
 
-    const { id } = await params;
+export default async function Page({ params }: { params: Params }) {
+    const { id } = params;
     let model: Model | null = null;
 
     try {
