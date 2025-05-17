@@ -11,7 +11,6 @@ type Model = {
     license: string;
     download_url: string;
 };
-type tParams = Promise<{ slug: string[] }>;
 
 async function fetchModelDetails(id: string) {
     const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model/${id}/`);
