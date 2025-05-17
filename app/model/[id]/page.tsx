@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import use from 'react' // import this line
 
 type Model = {
     id: number;
@@ -10,6 +11,7 @@ type Model = {
     license: string;
     download_url: string;
 };
+type tParams = Promise<{ slug: string[] }>;
 
 async function fetchModelDetails(id: string) {
     const res = await fetch(`http://137.184.36.245:18281/index.php?rest_route=/wp/v2/model/${id}/`);
@@ -19,12 +21,11 @@ async function fetchModelDetails(id: string) {
     return res.json();
 }
 
-export default async function ModelDetailPage({
-    params: { id },
-}: {
-    params: { id: string };
-}) {
+export default async function ModelDetailPage(params: {
+    params: Promise<{ slug: string }>;) {
     let model: Model | null = null;
+    const id = await (params).id;
+
 
     try {
         model = await fetchModelDetails(id);
