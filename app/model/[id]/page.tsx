@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import use from 'react' // import this line
+import use, { ReactNode } from 'react' // import this line
 
 type Model = {
     id: number;
@@ -21,12 +21,11 @@ async function fetchModelDetails(id: string) {
     return res.json();
 }
 
-export default async function ModelDetailPage(params: {
-    params: Promise<{ slug: string }>
-}) {
-    let model: Model | null = null;
-    const id = await (params).id;
+export default async function ModelDetailPage(props: { children: ReactNode; params: Promise<{ id: string }> }) {
+    const { children, params } = props;
 
+    const { id } = await params;
+    let model: Model | null = null;
 
     try {
         model = await fetchModelDetails(id);
