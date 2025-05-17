@@ -19,9 +19,8 @@ async function fetchModelDetails(id: string) {
     }
     return res.json();
 }
-
-export default async function Layout(props: { params: Promise<{ id: string }> }) {
-    const { params } = props;
+type Params = Promise<{ slug: string[] }>;
+export default async function Page({ params }: { params: Params }) {
 
     const { id } = await params;
     let model: Model | null = null;
